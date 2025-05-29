@@ -1,0 +1,115 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0403
+header_name {}
+code_name {}
+class AboutDialog {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window about_dialog {
+      label {About Decrypt Online Tool} open
+      xywh {717 537 400 280} type Double modal visible
+    } {
+      Fl_Text_Display td_version {
+        label {版本：}
+        xywh {140 20 255 40} box NO_BOX
+      }
+      Fl_Text_Display td_text {
+        xywh {140 65 255 180}
+      }
+      Fl_Button bn_about_enter {
+        label {确定(&O)}
+        xywh {315 250 80 25}
+      }
+      Fl_Box {} {
+        image {../resource/logo.png} compress_image 1 xywh {5 5 130 270}
+      }
+    }
+  }
+}
+
+class MainWindow {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window main_window {
+      label {Decrypt Online Tool} open
+      xywh {716 228 500 260} type Double non_modal visible
+    } {
+      Fl_Text_Display {} {
+        label {本程序不验证生成文件的正确性,请确保您有打开密文的权限!}
+        xywh {5 25 400 0} box NO_BOX
+      }
+      Fl_Group {} {
+        label {源文件} open
+        xywh {5 30 490 95} box THIN_DOWN_BOX align 21
+      } {
+        Fl_Round_Button rb_deal_file {
+          label {解密文件}
+          xywh {5 50 150 25} down_box ROUND_DOWN_BOX value 1
+        }
+        Fl_Round_Button rb_deal_dir {
+          label {解密文件夹}
+          xywh {5 75 150 25} down_box ROUND_DOWN_BOX
+        }
+        Fl_Input en_deal_file {
+          tooltip {支持拖放操作；多个文件以分号隔开} xywh {155 50 300 25}
+        }
+        Fl_Input en_deal_dir {
+          tooltip {支持拖放操作；支持整个文件夹处理} xywh {155 75 300 25}
+        }
+        Fl_Button bn_deal_file {
+          label {...}
+          xywh {460 50 30 25}
+        }
+        Fl_Button bn_deal_dir {
+          label {...}
+          xywh {460 75 30 25}
+        }
+        Fl_Check_Button cb_recursive {
+          label {包含子文件夹} selected
+          xywh {155 100 150 25} down_box DOWN_BOX value 1 compact 1
+        }
+      }
+      Fl_Group {} {
+        label {目标文件}
+        xywh {5 125 490 75} box THIN_DOWN_BOX align 21
+      } {
+        Fl_Round_Button rb_save_orig {
+          label {保存在原位置}
+          xywh {5 145 150 25} down_box ROUND_DOWN_BOX value 1
+        }
+        Fl_Round_Button rb_save_other {
+          label {保存到指定位置}
+          xywh {5 170 150 25} down_box ROUND_DOWN_BOX
+        }
+        Fl_Check_Button cb_backup {
+          label {备份源文件(.bak)}
+          xywh {155 145 150 25} down_box DOWN_BOX value 1
+        }
+        Fl_Input en_save_other {
+          tooltip {目标文件夹，覆盖保存} xywh {155 170 300 25}
+        }
+        Fl_Button bn_save_other {
+          label {...}
+          xywh {460 170 30 25}
+        }
+      }
+      Fl_Progress p_bar {
+        xywh {5 200 400 25}
+      }
+      Fl_Button bn_execute {
+        label {保存明文(&S)}
+        xywh {405 200 90 25}
+      }
+      Fl_Button bn_link {
+        label {免责声明}
+        xywh {5 230 100 25} box NO_BOX labelcolor 4
+      }
+      Fl_Button bn_about {
+        label {关于本程序...}
+        xywh {395 230 100 25} box NO_BOX labelcolor 4
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+[package]
+# The name of the executable file should be the same as the name of the resource(.rc) file in the resource folder, 
+# otherwise an error will be reported during compilation.
+name = "acad"
+version = "5.2.0"
+edition = "2024"
+
+[dependencies]
+# fltk = "1.5.9"
+fltk = { version = "1.5.9", features = ["fltk-bundled"] }
+fltk-theme = "0.7.9"
+
+[build-dependencies]
+fl2rust = "0.7.0"
+
+[target.'cfg(windows)'.build-dependencies]
+embed-resource = "3.0.2"
+
+[profile.release]
+strip = true
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
