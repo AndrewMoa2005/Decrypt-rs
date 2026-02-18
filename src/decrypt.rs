@@ -314,18 +314,17 @@ fn write_file(
             ])
             .status();
         #[cfg(target_family = "unix")]
-        let status = Command::new("bash")
+        let status = Command::new("sh")
             .args([
                 "-c",
-                "mv",
-                "-f",
-                &src.to_string_lossy(),
-                &bak.to_string_lossy(),
-                "&&",
-                "mv",
-                "-f",
-                &tmp.to_string_lossy(),
-                &src.to_string_lossy(),
+                &(String::from("mv -f ") 
+                + &src.to_string_lossy()
+                + " "
+                + &bak.to_string_lossy()
+                + String::from(" && mv -f ").as_str()
+                + &tmp.to_string_lossy()
+                + " "
+                + &src.to_string_lossy())
             ])
             .status();
 
@@ -353,13 +352,13 @@ fn write_file(
             ])
             .status();
         #[cfg(target_family = "unix")]
-        let status = Command::new("bash")
+        let status = Command::new("sh")
             .args([
                 "-c",
-                "mv",
-                "-f",
-                &tmp.to_string_lossy(),
-                &dst.to_string_lossy(),
+                &(String::from("mv -f ")
+                + &tmp.to_string_lossy()
+                + " "
+                + &dst.to_string_lossy())
             ])
             .status();
 
@@ -390,13 +389,13 @@ fn write_file(
             ])
             .status();
         #[cfg(target_family = "unix")]
-        let status = Command::new("bash")
+        let status = Command::new("sh")
             .args([
                 "-c",
-                "mv",
-                "-f",
-                &tmp.to_string_lossy(),
-                &src.to_string_lossy(),
+                &(String::from("mv -f ")
+                + &tmp.to_string_lossy()
+                + " "
+                + &src.to_string_lossy())
             ])
             .status();
 
