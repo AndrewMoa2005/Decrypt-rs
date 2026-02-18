@@ -18,6 +18,7 @@ pub fn execute_decrypt(
     recursive: bool,
     save_orig: bool,
     backup_orig: bool,
+    ext_name: &str,
     load_file_path: Vec<PathBuf>,
     load_dir_path: PathBuf,
     save_dir_path: PathBuf,
@@ -88,6 +89,7 @@ pub fn execute_decrypt(
             if write_file(
                 iter,
                 &PathBuf::from(""),
+                ext_name,
                 backup_orig,
                 save_orig,
                 should_stop,
@@ -110,7 +112,7 @@ pub fn execute_decrypt(
                 let filename = iter.file_name().unwrap();
                 let dst = save_dir_path.join(filename);
                 print!("Processing file: {:?} -> {:?}\n", iter, dst);
-                if write_file(iter, &dst, backup_orig, false, should_stop) {
+                if write_file(iter, &dst, ext_name,backup_orig, false, should_stop) {
                     processed += 1.0;
                 } else {
                     let pbar = widget.window.p_bar.clone();
@@ -131,7 +133,7 @@ pub fn execute_decrypt(
                 filepath = filepath.replace(in_dirpath, out_dirpath);
                 let dst = PathBuf::from(filepath);
                 print!("Processing file: {:?} -> {:?}\n", iter, dst);
-                if write_file(iter, &dst, backup_orig, false, should_stop) {
+                if write_file(iter, &dst, ext_name, backup_orig, false, should_stop) {
                     processed += 1.0;
                 } else {
                     let pbar = widget.window.p_bar.clone();
@@ -229,6 +231,7 @@ fn set_status(
 fn write_file(
     src: &PathBuf,
     dst: &PathBuf,
+    ext_name: &str,
     backup: bool,
     save_original: bool,
     should_stop: &bool,
@@ -254,7 +257,7 @@ fn write_file(
         }
     }
 
-    let tmp = PathBuf::from(format!("{}.cui", dst.to_string_lossy()));
+    let tmp = PathBuf::from(format!("{}.{}", dst.to_string_lossy(), ext_name));
 
     // Using an alternative to buffered I/O.
     let mut buffer = [0u8; 1024 * 1024]; // 1 MiB Buffer

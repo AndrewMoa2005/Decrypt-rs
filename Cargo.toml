@@ -1,7 +1,7 @@
 [package]
 # The name of the executable file should be the same as the name of the resource(.rc) file in the resource folder, 
 # otherwise an error will be reported during compilation.
-name = "acad"
+name = "decrypt"
 version = "5.2.1"
 edition = "2024"
 

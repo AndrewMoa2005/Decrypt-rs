@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0403
+version 1.0308
 header_name {}
 code_name {}
 class AboutDialog {open
@@ -7,7 +7,7 @@ class AboutDialog {open
   Function {make_window()} {open
   } {
     Fl_Window about_dialog {
-      label {About Decrypt Online Tool} open
+      label {About Decrypt Online Tool} open selected
       xywh {717 537 400 280} type Double modal visible
     } {
       Fl_Text_Display td_version {
@@ -22,7 +22,7 @@ class AboutDialog {open
         xywh {315 250 80 25}
       }
       Fl_Box {} {
-        image {../resource/logo.png} compress_image 1 xywh {5 5 130 270}
+        image {../resource/logo.png} xywh {5 5 130 270}
       }
     }
   }
@@ -34,7 +34,7 @@ class MainWindow {open
   } {
     Fl_Window main_window {
       label {Decrypt Online Tool} open
-      xywh {716 228 500 260} type Double non_modal visible
+      xywh {716 69 500 290} type Double non_modal visible
     } {
       Fl_Text_Display {} {
         label {本程序不验证生成文件的正确性,请确保您有打开密文的权限!}
@@ -67,13 +67,13 @@ class MainWindow {open
           xywh {460 75 30 25}
         }
         Fl_Check_Button cb_recursive {
-          label {包含子文件夹} selected
-          xywh {155 100 150 25} down_box DOWN_BOX value 1 compact 1
+          label {包含子文件夹}
+          xywh {155 100 150 25} down_box DOWN_BOX value 1
         }
       }
       Fl_Group {} {
-        label {目标文件}
-        xywh {5 125 490 75} box THIN_DOWN_BOX align 21
+        label {目标文件} open
+        xywh {5 125 490 100} box THIN_DOWN_BOX align 21
       } {
         Fl_Round_Button rb_save_orig {
           label {保存在原位置}
@@ -94,21 +94,28 @@ class MainWindow {open
           label {...}
           xywh {460 170 30 25}
         }
+        Fl_Check_Button cb_ext_name {
+          label {中间拓展名}
+          xywh {5 195 140 25} down_box DOWN_BOX
+        }
+        Fl_Input en_ext_name {
+          tooltip {解密文件的中间拓展名，默认为cui} xywh {155 195 335 25}
+        }
       }
       Fl_Progress p_bar {
-        xywh {5 200 400 25}
+        xywh {5 230 400 25}
       }
       Fl_Button bn_execute {
         label {保存明文(&S)}
-        xywh {405 200 90 25}
+        xywh {405 230 90 25}
       }
       Fl_Button bn_link {
         label {免责声明}
-        xywh {5 230 100 25} box NO_BOX labelcolor 4
+        xywh {5 260 100 25} box NO_BOX labelcolor 4
       }
       Fl_Button bn_about {
         label {关于本程序...}
-        xywh {395 230 100 25} box NO_BOX labelcolor 4
+        xywh {395 260 100 25} box NO_BOX labelcolor 4
       }
     }
   }

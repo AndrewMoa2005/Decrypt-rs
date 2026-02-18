@@ -112,6 +112,11 @@ impl Widget {
             }
         });
 
+        let mut ui_weak = ui.clone();
+        ui.cb_ext_name.set_callback(move |_| {
+            Self::reflush_active(ui_weak.clone());
+        });
+
         ui.bn_link.set_callback(|_| {
             let str = include_str!("../resource/statement.txt");
             fltk::dialog::message_title("免责声明");
@@ -168,6 +173,11 @@ impl Widget {
             ui.cb_backup.deactivate();
             ui.en_save_other.activate();
             ui.bn_save_other.activate();
+        }
+        if ui.cb_ext_name.value() {
+            ui.en_ext_name.activate();
+        } else {
+            ui.en_ext_name.deactivate();
         }
     }
 

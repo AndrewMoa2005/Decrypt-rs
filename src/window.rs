@@ -34,6 +34,13 @@ fn show_window() {
     let ui = w.lock().unwrap().window.clone();
     let w_clone = Arc::clone(&w);
     ui.clone().bn_execute.set_callback(move |_| {
+        if ui.cb_ext_name.value() {
+            if ui.en_ext_name.value().is_empty() {
+                fltk::dialog::alert_default("中间拓展名不能为空!");
+                println!("File ext name is empty!");
+                return;
+            }
+        }
         let mut w = w_clone.lock().unwrap();
         if !w.on_process {
             w.on_process = true;
@@ -46,6 +53,11 @@ fn show_window() {
             let path_deal_dir = PathBuf::from(ui.en_deal_dir.value());
             let path_save_other = PathBuf::from(ui.en_save_other.value());
             let w_thread = Arc::clone(&w_clone);
+            let ext_name = if ui.cb_ext_name.value() {
+                ui.en_ext_name.value()
+            } else {
+                "cui".to_string()
+            };
             /* let thread_join_handle = */
             thread::spawn(move || {
                 let mut w = w_thread.lock().unwrap();
@@ -54,6 +66,7 @@ fn show_window() {
                     b_recursive,
                     b_save_orig,
                     b_backup,
+                    ext_name.as_str(),
                     vec_files,
                     path_deal_dir,
                     path_save_other,
