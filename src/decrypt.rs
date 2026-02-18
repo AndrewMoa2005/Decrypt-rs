@@ -317,14 +317,7 @@ fn write_file(
         let status = Command::new("sh")
             .args([
                 "-c",
-                &(String::from("mv -f ") 
-                + &src.to_string_lossy()
-                + " "
-                + &bak.to_string_lossy()
-                + String::from(" && mv -f ").as_str()
-                + &tmp.to_string_lossy()
-                + " "
-                + &src.to_string_lossy())
+                format!("mv -f {:?} {:?} && mv -f {:?} {:?}", src, bak, tmp, src,).as_str(),
             ])
             .status();
 
@@ -355,10 +348,7 @@ fn write_file(
         let status = Command::new("sh")
             .args([
                 "-c",
-                &(String::from("mv -f ")
-                + &tmp.to_string_lossy()
-                + " "
-                + &dst.to_string_lossy())
+                format!("mv -f {:?} {:?}", tmp, dst,).as_str(),
             ])
             .status();
 
@@ -392,10 +382,7 @@ fn write_file(
         let status = Command::new("sh")
             .args([
                 "-c",
-                &(String::from("mv -f ")
-                + &tmp.to_string_lossy()
-                + " "
-                + &src.to_string_lossy())
+                format!("mv -f {:?} {:?}", tmp, src,).as_str(),
             ])
             .status();
 
