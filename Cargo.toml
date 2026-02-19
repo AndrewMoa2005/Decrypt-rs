@@ -5,10 +5,20 @@ name = "decrypt"
 version = "5.2.1"
 edition = "2024"
 
+[lib]
+name = "decrypt"
+crate-type = ["cdylib"]
+path = "lib/lib.rs"
+
+[[bin]]
+name = "decrypt"
+path = "src/main.rs"
+
 [dependencies]
 # fltk = "1.5.9"
 fltk = { version = "1.5.9", features = ["fltk-bundled"] }
 fltk-theme = "0.7.9"
+libloading = "0.9.0"
 
 [build-dependencies]
 fl2rust = "0.7.0"

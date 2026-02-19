@@ -1,4 +1,4 @@
-// src/window.rs
+// lib/window.rs
 use fltk::{prelude::*, *};
 use fltk_theme::{ColorTheme, color_themes};
 // use fltk_theme::{WidgetScheme, SchemeType,};
@@ -10,7 +10,7 @@ use crate::decrypt::*;
 use crate::path::*;
 use crate::widget::*;
 
-pub fn main_app() {
+pub fn main_window() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);
     // let app = app::App::default();
     using_theme();

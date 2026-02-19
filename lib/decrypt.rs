@@ -1,4 +1,4 @@
-// src/decrypt.rs
+// lib/decrypt.rs
 use fltk::{prelude::*, *};
 use std::fs;
 use std::io::{Read, Write};

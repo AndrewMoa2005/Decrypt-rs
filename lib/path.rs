@@ -1,4 +1,4 @@
-// src/path.rs
+// lib/path.rs
 use std::path::PathBuf;
 
 pub fn split_string_into_vec_pathbuf(str: String, c: char) -> (bool, Vec<PathBuf>) {
