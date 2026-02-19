@@ -9,12 +9,18 @@ fn main() {
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     g.in_out("ui/widget.fl", out_path.join("widget.rs").to_str().unwrap())
         .expect("Failed to generate rust from fl file!");
+    println!("cargo:rerun-if-changed=ui/launcher.fl");
+    g.in_out("ui/launcher.fl", out_path.join("launcher.rs").to_str().unwrap())
+        .expect("Failed to generate rust from fl file!");
 
     #[cfg(windows)]
     {
-        let rc_file = String::from("resource/") + &env::var("CARGO_PKG_NAME").unwrap() + ".rc";
-
-        embed_resource::compile(rc_file.as_str(), embed_resource::NONE)
+        let main_rc = String::from("resource/") + &env::var("CARGO_PKG_NAME").unwrap() + ".rc";
+        embed_resource::compile(main_rc.as_str(), embed_resource::NONE)
+            .manifest_optional()
+            .unwrap();
+        let launcher_rc = String::from("resource/") + "launcher" + ".rc";
+        embed_resource::compile(launcher_rc.as_str(), embed_resource::NONE)
             .manifest_optional()
             .unwrap();
     }

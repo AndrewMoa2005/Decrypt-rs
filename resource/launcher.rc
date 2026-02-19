@@ -1,0 +1,2 @@
+// resource/launcher.rc
+binary_icon ICON "decrypt.ico"
