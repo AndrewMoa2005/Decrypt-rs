@@ -120,3 +120,23 @@ class MainWindow {open
     }
   }
 }
+
+class LauncherWindow {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window launcher_win {
+      label Launcher open selected
+      xywh {660 566 500 100} type Double visible
+    } {
+      Fl_Input en_ps_name {
+        label {进程名}
+        tooltip {请输入解密程序启动进程名称} xywh {80 30 300 40}
+      }
+      Fl_Button bn_ps_new {
+        label {启动}
+        xywh {385 30 60 40}
+      }
+    }
+  }
+}

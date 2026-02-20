@@ -9,9 +9,6 @@ fn main() {
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     g.in_out("ui/widget.fl", out_path.join("widget.rs").to_str().unwrap())
         .expect("Failed to generate rust from fl file!");
-    println!("cargo:rerun-if-changed=ui/launcher.fl");
-    g.in_out("ui/launcher.fl", out_path.join("launcher.rs").to_str().unwrap())
-        .expect("Failed to generate rust from fl file!");
 
     #[cfg(windows)]
     {

@@ -1,7 +1,5 @@
 // lib/window.rs
 use fltk::{prelude::*, *};
-use fltk_theme::{ColorTheme, color_themes};
-// use fltk_theme::{WidgetScheme, SchemeType,};
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -9,22 +7,14 @@ use std::thread;
 use crate::decrypt::*;
 use crate::path::*;
 use crate::widget::*;
+use crate::theme::*;
 
-pub fn main_window() {
+pub fn main_app() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);
     // let app = app::App::default();
     using_theme();
     show_window();
     app.run().unwrap();
-}
-
-fn using_theme() {
-    let theme = ColorTheme::new(&color_themes::fleet::LIGHT);
-    theme.apply();
-    /*
-    let widget_scheme = WidgetScheme::new(SchemeType::Fleet1);
-    widget_scheme.apply();
-    */
 }
 
 // We need to bind the callback function for the decrypt method that is independent of FLTK here,

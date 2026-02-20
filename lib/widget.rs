@@ -5,6 +5,7 @@
 #![allow(clippy::needless_update)]
 #![allow(unused_assignments)]
 
+use crate::loadicon::*;
 use fltk::{prelude::*, *};
 use std::path::{Path, PathBuf};
 
@@ -30,21 +31,9 @@ impl Widget {
         w
     }
 
-    fn load_icon_from_resource(mut w: fltk::window::DoubleWindow) {
-        // Directly compile the icon file into the binary.
-        let icon_data = include_bytes!(concat!("../resource/", env!("CARGO_PKG_NAME"), ".png"));
-        /*
-        The loading of the ICO file may occasionally encounter errors that prevent the program from starting;
-        therefore, PNG images are used here, which also helps to reduce the size of the program package.
-        */
-        if let Ok(icon) = fltk::image::PngImage::from_data(icon_data) {
-            w.set_icon(Some(icon));
-        }
-    }
-
     fn make_window() -> MainWindow {
         let mut ui = MainWindow::make_window();
-        Self::load_icon_from_resource(ui.main_window.clone());
+        load_icon_from_resource(ui.main_window.clone());
         //initialize MainWindow widgets
         Self::reflush_active(ui.clone());
         ui.p_bar.set_maximum(1.0);
