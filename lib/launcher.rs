@@ -28,12 +28,22 @@ fn make_window() {
     let mut ui = LauncherWindow::make_window();
     load_icon_from_resource(ui.launcher_win.clone());
     ui.en_ps_name.set_value(env!("CARGO_PKG_NAME"));
+
+    ui.en_ps_name.set_trigger(CallbackTrigger::EnterKey);
+    let mut ui_clone = ui.clone();
+    ui.en_ps_name.set_callback(move |_| {
+        ui_clone.bn_ps_new.do_callback();
+    });
+
     ui.bn_ps_new.set_callback(move |_| {
         if ui.en_ps_name.value().is_empty() {
             fltk::dialog::alert_default("进程名不能为空!");
             println!("Process name is empty!");
             return;
         }
+
+        ui.launcher_win.hide();
+
         let ps_name = ui.en_ps_name.value();
         println!("Process name: {}", ps_name);
         let launcher_path = env::current_exe().unwrap();
@@ -70,6 +80,7 @@ fn make_window() {
             .status();
         #[cfg(target_family = "unix")]
         let status = Command::new(&exe_path).status();
+
         match status {
             Ok(exit_status) if !exit_status.success() => {
                 eprintln!("Failed to launcher: {:?}", exe_path);
@@ -83,6 +94,6 @@ fn make_window() {
             std::fs::remove_file(&exe_path).unwrap();
             println!("Deleted: {:?}", &exe_path);
         }
-        ui.launcher_win.hide();
+        std::process::exit(0);
     });
 }

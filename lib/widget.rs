@@ -118,6 +118,15 @@ impl Widget {
             Self::show_about_dialog();
         });
 
+        // let ui_weak = ui.clone();
+        ui.main_window.set_callback(move |w| {
+            if let Event::Close = app::event() {
+                w.hide();
+                app::quit();
+                std::process::exit(0);
+            }
+        });
+
         ui
     }
 

@@ -16,9 +16,5 @@ fn main() {
         embed_resource::compile(main_rc.as_str(), embed_resource::NONE)
             .manifest_optional()
             .unwrap();
-        let launcher_rc = String::from("resource/") + "launcher" + ".rc";
-        embed_resource::compile(launcher_rc.as_str(), embed_resource::NONE)
-            .manifest_optional()
-            .unwrap();
     }
 }
